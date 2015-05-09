@@ -30,7 +30,7 @@ public class GLShader implements GLInterface, GLCloseable
 		mShaderSource = IOUtils.toString(lResourceAsStream, "UTF-8");
 		mShaderType = pShaderType;
 
-		final HashMap<GLShaderType, Integer> glShaderTypeMapping = new HashMap<>();
+		final HashMap<GLShaderType, Integer> glShaderTypeMapping = new HashMap<GLShaderType, Integer>();
 		glShaderTypeMapping.put(GLShaderType.VertexShader,
 														GL2.GL_VERTEX_SHADER);
 		glShaderTypeMapping.put(GLShaderType.GeometryShader,
@@ -60,7 +60,7 @@ public class GLShader implements GLInterface, GLCloseable
 		mShaderSource = pShaderSourceAsString;
 		mShaderType = pShaderType;
 
-		final HashMap<GLShaderType, Integer> glShaderTypeMapping = new HashMap<>();
+		final HashMap<GLShaderType, Integer> glShaderTypeMapping = new HashMap<GLShaderType, Integer>();
 		glShaderTypeMapping.put(GLShaderType.VertexShader,
 														GL4.GL_VERTEX_SHADER);
 		glShaderTypeMapping.put(GLShaderType.GeometryShader,

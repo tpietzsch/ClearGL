@@ -1,13 +1,11 @@
 package cleargl.demo;
 
-import java.io.IOException;
 import java.nio.Buffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
 import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
-import javax.media.opengl.GLException;
 
 import org.junit.Test;
 
@@ -170,7 +168,7 @@ public class ClearGLDemo
 					mTexture3.copyFrom(getTextureBuffer3());
 
 				}
-				catch (GLException | IOException e)
+				catch (final Throwable e)
 				{
 					e.printStackTrace();
 				}
@@ -276,16 +274,20 @@ public class ClearGLDemo
 		};
 
 		lClearGLWindowEventListener.setDebugMode(true);
-
-		try (ClearGLDisplayable lClearGLWindow = new ClearGLWindow(	"demo: ClearGLWindow",
+		final ClearGLDisplayable lClearGLWindow = new ClearGLWindow("demo: ClearGLWindow",
 																																512,
 																																512,
-																																lClearGLWindowEventListener))
+																																lClearGLWindowEventListener);
+		try
 		{
 			// lClearGLWindow.disableClose();
 			lClearGLWindow.setVisible(true);
 
 			Thread.sleep(2000);
+		}
+		finally
+		{
+			lClearGLWindow.close();
 		}
 
 		/*try (ClearGLJPanel lClearGLJPanel = new ClearGLJPanel(lClearGLWindowEventListener))

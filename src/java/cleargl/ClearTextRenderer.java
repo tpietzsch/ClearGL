@@ -38,7 +38,7 @@ public class ClearTextRenderer {
 	protected GL mGL;
   protected final boolean mShouldCache;
 
-  protected HashMap<String, ByteBuffer> textureCache = new HashMap<>();
+	protected HashMap<String, ByteBuffer> textureCache = new HashMap<String, ByteBuffer>();
 
 	public ClearTextRenderer(GL pGL, boolean shouldCache)
 	{

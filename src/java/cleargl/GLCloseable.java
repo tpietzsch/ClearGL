@@ -2,8 +2,8 @@ package cleargl;
 
 import javax.media.opengl.GLException;
 
-public interface GLCloseable extends AutoCloseable
+public interface GLCloseable
 {
-	@Override
+
 	public void close() throws GLException;
 }

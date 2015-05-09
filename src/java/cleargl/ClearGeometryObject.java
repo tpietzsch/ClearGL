@@ -2,7 +2,7 @@ package cleargl;
 
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
-import java.util.Hashtable;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.media.opengl.GL;
 import javax.media.opengl.GLException;
@@ -21,7 +21,7 @@ public class ClearGeometryObject implements GLCloseable, GLInterface {
 	private GLMatrix mModelViewMatrix;
 	private GLMatrix mProjectionMatrix;
 
-	private final Hashtable<String, Integer> additionalBufferIds = new Hashtable<>();
+	private final ConcurrentHashMap<String, Integer> additionalBufferIds = new ConcurrentHashMap<String, Integer>();
 
 	private final int[] mVertexArrayObject = new int[1];
 	private final int[] mVertexBuffers = new int[3];
