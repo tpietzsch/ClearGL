@@ -7,35 +7,36 @@ import java.nio.IntBuffer;
 public class GLIntArray
 {
 
-	private int mElementSize;
+	private final int mElementSize;
+
 	private IntBuffer mIntBuffer;
 
-	public GLIntArray(int pNumberOfElements, int pElementSize)
+	public GLIntArray( final int pNumberOfElements, final int pElementSize )
 	{
 		super();
 		mElementSize = pElementSize;
-		mIntBuffer = allocate(pNumberOfElements);
+		mIntBuffer = allocate( pNumberOfElements );
 	}
 
-	private IntBuffer allocate(int pNewCapacity)
+	private IntBuffer allocate( final int pNewCapacity )
 	{
-		return ByteBuffer.allocateDirect(pNewCapacity * mElementSize
-																			* (Integer.SIZE / Byte.SIZE))
-											.order(ByteOrder.nativeOrder())
-											.asIntBuffer();
+		return ByteBuffer.allocateDirect( pNewCapacity * mElementSize
+				* ( Integer.SIZE / Byte.SIZE ) )
+				.order( ByteOrder.nativeOrder() )
+				.asIntBuffer();
 	}
 
-	public void add(int... pElementInts)
+	public void add( final int... pElementInts )
 	{
-		if (mIntBuffer.remaining() < pElementInts.length)
+		if ( mIntBuffer.remaining() < pElementInts.length )
 		{
-			final int lNewCapacity = (int) 1.5 * mIntBuffer.capacity();
-			IntBuffer lNewBuffer = allocate(lNewCapacity);
-			lNewBuffer.put(mIntBuffer);
+			final int lNewCapacity = ( int ) 1.5 * mIntBuffer.capacity();
+			final IntBuffer lNewBuffer = allocate( lNewCapacity );
+			lNewBuffer.put( mIntBuffer );
 			mIntBuffer = lNewBuffer;
 		}
 
-		mIntBuffer.put(pElementInts);
+		mIntBuffer.put( pElementInts );
 	}
 
 	public void clear()
@@ -51,8 +52,8 @@ public class GLIntArray
 
 	public void padZeros()
 	{
-		while (mIntBuffer.hasRemaining())
-			mIntBuffer.put(0);
+		while ( mIntBuffer.hasRemaining() )
+			mIntBuffer.put( 0 );
 	}
 
 	public void rewind()

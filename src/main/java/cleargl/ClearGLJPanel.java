@@ -1,5 +1,8 @@
 package cleargl;
 
+import java.awt.Component;
+import java.io.PrintStream;
+
 import com.jogamp.nativewindow.WindowClosingProtocol.WindowClosingMode;
 import com.jogamp.newt.event.KeyListener;
 import com.jogamp.newt.event.MouseListener;
@@ -12,9 +15,6 @@ import com.jogamp.opengl.GLException;
 import com.jogamp.opengl.GLProfile;
 import com.jogamp.opengl.awt.GLJPanel;
 
-import java.awt.*;
-import java.io.PrintStream;
-
 public class ClearGLJPanel implements ClearGLDisplayable
 
 {
@@ -23,17 +23,18 @@ public class ClearGLJPanel implements ClearGLDisplayable
 	private final GLJPanel mGLJPanel;
 
 	private final GLMatrix mProjectionMatrix;
+
 	private final GLMatrix mViewMatrix;
 
-	public ClearGLJPanel(ClearGLEventListener pClearGLEventListener)
+	public ClearGLJPanel( final ClearGLEventListener pClearGLEventListener )
 	{
-		final GLProfile lProfile = GLProfile.getMaxProgrammable(true);
-		final GLCapabilities lGlCapabilities = new GLCapabilities(lProfile);
-		mGLJPanel = new GLJPanel(lGlCapabilities);
+		final GLProfile lProfile = GLProfile.getMaxProgrammable( true );
+		final GLCapabilities lGlCapabilities = new GLCapabilities( lProfile );
+		mGLJPanel = new GLJPanel( lGlCapabilities );
 
-		pClearGLEventListener.setClearGLWindow(null);
-		getGLJPanel().addGLEventListener(pClearGLEventListener);
-		getGLJPanel().setAutoSwapBufferMode(true);
+		pClearGLEventListener.setClearGLWindow( null );
+		getGLJPanel().addGLEventListener( pClearGLEventListener );
+		getGLJPanel().setAutoSwapBufferMode( true );
 
 		mProjectionMatrix = new GLMatrix();
 		mViewMatrix = new GLMatrix();
@@ -41,57 +42,62 @@ public class ClearGLJPanel implements ClearGLDisplayable
 
 	@Override
 	public void close() throws GLException
+	{}
+
+	@Override
+	public void setPerspectiveProjectionMatrix(
+			final float fov,
+			final float ratio,
+			final float nearP,
+			final float farP )
 	{
+		mProjectionMatrix.setPerspectiveProjectionMatrix(
+				fov,
+				ratio,
+				nearP,
+				farP );
 	}
 
 	@Override
-	public void setPerspectiveProjectionMatrix(	float fov,
-																							float ratio,
-																							float nearP,
-																							float farP)
+	public void setOrthoProjectionMatrix(
+			final float left,
+			final float right,
+			final float bottom,
+			final float top,
+			final float zNear,
+			final float zFar )
 	{
-		mProjectionMatrix.setPerspectiveProjectionMatrix(	fov,
-																											ratio,
-																											nearP,
-																											farP);
+		mProjectionMatrix.setOrthoProjectionMatrix(
+				left,
+				right,
+				bottom,
+				top,
+				zNear,
+				zFar );
 	}
 
 	@Override
-	public void setOrthoProjectionMatrix(	final float left,
-																				final float right,
-																				final float bottom,
-																				final float top,
-																				final float zNear,
-																				final float zFar)
+	public void lookAt(
+			final float pPosX,
+			final float pPosY,
+			final float pPosZ,
+			final float pLookAtX,
+			final float pLookAtY,
+			final float pLookAtZ,
+			final float pUpX,
+			final float pUpY,
+			final float pUpZ )
 	{
-		mProjectionMatrix.setOrthoProjectionMatrix(	left,
-																								right,
-																								bottom,
-																								top,
-																								zNear,
-																								zFar);
-	}
-
-	@Override
-	public void lookAt(	float pPosX,
-											float pPosY,
-											float pPosZ,
-											float pLookAtX,
-											float pLookAtY,
-											float pLookAtZ,
-											float pUpX,
-											float pUpY,
-											float pUpZ)
-	{
-		mViewMatrix.setCamera(pPosX,
-													pPosY,
-													pPosZ,
-													pLookAtX,
-													pLookAtY,
-													pLookAtZ,
-													pUpX,
-													pUpY,
-													pUpZ);
+		mViewMatrix.setCamera(
+				pPosX,
+				pPosY,
+				pPosZ,
+				pLookAtX,
+				pLookAtY,
+				pLookAtZ,
+				pUpX,
+				pUpY,
+				pUpZ );
 	}
 
 	@Override
@@ -110,19 +116,19 @@ public class ClearGLJPanel implements ClearGLDisplayable
 	public String toString()
 	{
 		return "ClearGLJPanel [mProjectionMatrix=" + mProjectionMatrix
-						+ ", mViewMatrix="
-						+ mViewMatrix
-						+ "]";
+				+ ", mViewMatrix="
+				+ mViewMatrix
+				+ "]";
 	}
 
 	// @Override
-	public WindowClosingMode setDdefaultCloseOperation(WindowClosingMode pWindowClosingMode)
+	public WindowClosingMode setDdefaultCloseOperation( final WindowClosingMode pWindowClosingMode )
 	{
-		return getGLJPanel().setDefaultCloseOperation(pWindowClosingMode);
+		return getGLJPanel().setDefaultCloseOperation( pWindowClosingMode );
 	}
 
 	@Override
-	public void setWindowTitle(String pTitleString)
+	public void setWindowTitle( final String pTitleString )
 	{
 		// no title
 	}
@@ -152,7 +158,7 @@ public class ClearGLJPanel implements ClearGLDisplayable
 	}
 
 	@Override
-	public void setFullscreen(boolean pFullScreen)
+	public void setFullscreen( final boolean pFullScreen )
 	{
 		// no full screen
 	}
@@ -164,29 +170,29 @@ public class ClearGLJPanel implements ClearGLDisplayable
 	}
 
 	@Override
-	public void addMouseListener(MouseListener pMouseListener)
+	public void addMouseListener( final MouseListener pMouseListener )
 	{
-		new AWTMouseAdapter(pMouseListener,
-												getGLJPanel().getDelegatedDrawable()).addTo(getGLJPanel());
+		new AWTMouseAdapter( pMouseListener,
+				getGLJPanel().getDelegatedDrawable() ).addTo( getGLJPanel() );
 	}
 
 	@Override
-	public void addKeyListener(KeyListener pKeyListener)
+	public void addKeyListener( final KeyListener pKeyListener )
 	{
-		new AWTKeyAdapter(pKeyListener,
-											getGLJPanel().getDelegatedDrawable()).addTo(getGLJPanel());
+		new AWTKeyAdapter( pKeyListener,
+				getGLJPanel().getDelegatedDrawable() ).addTo( getGLJPanel() );
 	}
 
 	@Override
-	public void addWindowListener(WindowAdapter pWindowAdapter)
+	public void addWindowListener( final WindowAdapter pWindowAdapter )
 	{
-		new AWTWindowAdapter(	pWindowAdapter,
-													getGLJPanel().getDelegatedDrawable()).addTo(getGLJPanel());
+		new AWTWindowAdapter( pWindowAdapter,
+				getGLJPanel().getDelegatedDrawable() ).addTo( getGLJPanel() );
 	}
 
 	@Override
-	public void setUpdateFPSFrames(	int pFramesPerSecond,
-																	PrintStream pPrintStream)
+	public void setUpdateFPSFrames( final int pFramesPerSecond,
+			final PrintStream pPrintStream )
 	{
 		// no fps
 	}
@@ -199,12 +205,13 @@ public class ClearGLJPanel implements ClearGLDisplayable
 	}
 
 	@Override
-	public float getAspectRatio() {
-		return getWidth()/getHeight();
+	public float getAspectRatio()
+	{
+		return getWidth() / getHeight();
 	}
 
 	@Override
-	public WindowClosingMode setDefaultCloseOperation(WindowClosingMode pWindowClosingMode)
+	public WindowClosingMode setDefaultCloseOperation( final WindowClosingMode pWindowClosingMode )
 	{
 		return null;
 	}
@@ -222,15 +229,15 @@ public class ClearGLJPanel implements ClearGLDisplayable
 	}
 
 	@Override
-	public void setSize(int pWindowWidth, int pWindowHeight)
+	public void setSize( final int pWindowWidth, final int pWindowHeight )
 	{
-		getGLJPanel().setSize(pWindowWidth, pWindowHeight);
+		getGLJPanel().setSize( pWindowWidth, pWindowHeight );
 	}
 
 	@Override
-	public void setVisible(boolean pIsVisible)
+	public void setVisible( final boolean pIsVisible )
 	{
-		getGLJPanel().setVisible(pIsVisible);
+		getGLJPanel().setVisible( pIsVisible );
 	}
 
 	@Override

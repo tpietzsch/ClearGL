@@ -10,21 +10,21 @@ public class FolderChooser extends JFileChooser
 {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private FolderChooser(String pChooserTitle, File pDefaultFolder)
+	private FolderChooser( final String pChooserTitle, final File pDefaultFolder )
 	{
 		super();
-		setDialogTitle(pChooserTitle);
-		setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-		setAcceptAllFileFilterUsed(false);
-		setFileFilter(new FileFilter()
+		setDialogTitle( pChooserTitle );
+		setFileSelectionMode( JFileChooser.DIRECTORIES_ONLY );
+		setAcceptAllFileFilterUsed( false );
+		setFileFilter( new FileFilter()
 		{
 
 			@Override
-			public boolean accept(File f)
+			public boolean accept( final File f )
 			{
 				return f.isDirectory();
 			}
@@ -35,19 +35,19 @@ public class FolderChooser extends JFileChooser
 				return "Directories only";
 			}
 
-		});
-		setCurrentDirectory(pDefaultFolder.getParentFile());
-		setSelectedFile(pDefaultFolder);
+		} );
+		setCurrentDirectory( pDefaultFolder.getParentFile() );
+		setSelectedFile( pDefaultFolder );
 	}
 
-	public static File openFolderChooser(	Component pParent,
-																				String pChooserTitle,
-																				File pDefaultFolder)
+	public static File openFolderChooser( final Component pParent,
+			final String pChooserTitle,
+			final File pDefaultFolder )
 	{
-		FolderChooser lFolderChooser = new FolderChooser(	pChooserTitle,
-																											pDefaultFolder);
+		final FolderChooser lFolderChooser = new FolderChooser( pChooserTitle,
+				pDefaultFolder );
 
-		if (lFolderChooser.showOpenDialog(pParent) == JFileChooser.APPROVE_OPTION)
+		if ( lFolderChooser.showOpenDialog( pParent ) == JFileChooser.APPROVE_OPTION )
 		{
 			return lFolderChooser.getSelectedFile();
 		}

@@ -6,53 +6,56 @@ import java.nio.FloatBuffer;
 
 public class GLFloatArray
 {
-	private int mElementSize;
+	private final int mElementSize;
+
 	private FloatBuffer mFloatBuffer;
+
 	private volatile int mLastDataPosition;
 
-	public GLFloatArray(int pNumberOfElements, int pElementSize)
+	public GLFloatArray( final int pNumberOfElements, final int pElementSize )
 	{
 		super();
 		mElementSize = pElementSize;
-		mFloatBuffer = allocate(pNumberOfElements);
+		mFloatBuffer = allocate( pNumberOfElements );
 	}
 
-	private FloatBuffer allocate(int pNewCapacity)
+	private FloatBuffer allocate( final int pNewCapacity )
 	{
-		return ByteBuffer.allocateDirect(pNewCapacity * mElementSize
-																			* (Float.SIZE / Byte.SIZE))
-											.order(ByteOrder.nativeOrder())
-											.asFloatBuffer();
+		return ByteBuffer.allocateDirect( pNewCapacity * mElementSize
+				* ( Float.SIZE / Byte.SIZE ) )
+				.order( ByteOrder.nativeOrder() )
+				.asFloatBuffer();
 	}
 
-	private FloatBuffer allocateN(int pNewCapacity)
+	private FloatBuffer allocateN( final int pNewCapacity )
 	{
-		return ByteBuffer.allocateDirect(pNewCapacity * (Float.SIZE / Byte.SIZE))
-											.order(ByteOrder.nativeOrder())
-											.asFloatBuffer();
+		return ByteBuffer.allocateDirect( pNewCapacity * ( Float.SIZE / Byte.SIZE ) )
+				.order( ByteOrder.nativeOrder() )
+				.asFloatBuffer();
 	}
 
-	public void copyFromBuffer(FloatBuffer buffer)
+	public void copyFromBuffer( final FloatBuffer buffer )
 	{
-		mFloatBuffer.put(buffer);
+		mFloatBuffer.put( buffer );
 	}
 
-	public void add(float... pElementFloats)
+	public void add( final float... pElementFloats )
 	{
 		// System.out.println("cap: " + mFloatBuffer.capacity() + " rem: " +
-		// mFloatBuffer.remaining() + " lim: " + mFloatBuffer.limit() + " newe: " +
+		// mFloatBuffer.remaining() + " lim: " + mFloatBuffer.limit() + " newe:
+		// " +
 		// pElementFloats.length + " pos " + mFloatBuffer.position() + " ldp " +
 		// mLastDataPosition);
 
-		if (mLastDataPosition + pElementFloats.length > mFloatBuffer.capacity())
+		if ( mLastDataPosition + pElementFloats.length > mFloatBuffer.capacity() )
 		{
 			final int lNewCapacity = mFloatBuffer.capacity() + pElementFloats.length;
-			FloatBuffer lNewBuffer = allocateN(lNewCapacity);
-			lNewBuffer.put(mFloatBuffer);
+			final FloatBuffer lNewBuffer = allocateN( lNewCapacity );
+			lNewBuffer.put( mFloatBuffer );
 			mFloatBuffer = lNewBuffer;
 		}
 
-		mFloatBuffer.put(pElementFloats);
+		mFloatBuffer.put( pElementFloats );
 		// System.out.println("new cap: " + mFloatBuffer.capacity());
 		mLastDataPosition = mFloatBuffer.position();
 	}
@@ -71,8 +74,8 @@ public class GLFloatArray
 
 	public void padZeros()
 	{
-		while (mFloatBuffer.hasRemaining())
-			mFloatBuffer.put(0);
+		while ( mFloatBuffer.hasRemaining() )
+			mFloatBuffer.put( 0 );
 	}
 
 	public void rewind()

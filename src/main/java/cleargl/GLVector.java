@@ -1,10 +1,10 @@
 package cleargl;
 
-import com.jogamp.opengl.math.Quaternion;
-import com.jogamp.opengl.math.VectorUtil;
-
 import java.nio.FloatBuffer;
 import java.util.Arrays;
+
+import com.jogamp.opengl.math.Quaternion;
+import com.jogamp.opengl.math.VectorUtil;
 
 /*
 @author Ulrik Günther, Loïc Royer
@@ -13,140 +13,149 @@ import java.util.Arrays;
 public class GLVector
 {
 	protected float[] mElements;
+
 	protected int mDimension;
 
-	public GLVector(float... pElements)
+	public GLVector( final float... pElements )
 	{
 		super();
-		mElements = Arrays.copyOf(pElements, pElements.length);
+		mElements = Arrays.copyOf( pElements, pElements.length );
 		mDimension = pElements.length;
 	}
 
-	public GLVector(float element, int dimension) {
+	public GLVector( final float element, final int dimension )
+	{
 		super();
-		mElements = new float[dimension];
-		for(int i = 0; i < dimension; i++) {
-			mElements[i] = element;
+		mElements = new float[ dimension ];
+		for ( int i = 0; i < dimension; i++ )
+		{
+			mElements[ i ] = element;
 		}
 
 		mDimension = dimension;
 	}
 
-	public GLVector(GLVector pGLVector)
+	public GLVector( final GLVector pGLVector )
 	{
 		super();
-		mElements = Arrays.copyOf(pGLVector.mElements,
-															pGLVector.mElements.length);
+		mElements = Arrays.copyOf( pGLVector.mElements,
+				pGLVector.mElements.length );
 		mDimension = pGLVector.mElements.length;
 	}
 
+	@Override
 	public GLVector clone()
 	{
-		return new GLVector(this);
+		return new GLVector( this );
 	}
 
 	public float x()
 	{
-		return mElements[0];
+		return mElements[ 0 ];
 	}
 
 	public float y()
 	{
-		return mElements[1];
+		return mElements[ 1 ];
 	}
 
 	public float z()
 	{
-		return mElements[2];
+		return mElements[ 2 ];
 	}
 
 	public float w()
 	{
-		return mElements[3];
+		return mElements[ 3 ];
 	}
 
-	public GLVector xyz() {
-		return new GLVector(mElements[0], mElements[1], mElements[2]);
-	}
-
-	public GLVector xyzw() {
-		return new GLVector(mElements[0], mElements[1], mElements[2], mElements[3]);
-	}
-
-	public float get(int pIndex)
+	public GLVector xyz()
 	{
-		return mElements[pIndex];
+		return new GLVector( mElements[ 0 ], mElements[ 1 ], mElements[ 2 ] );
 	}
 
-	public void set(int pIndex, float pValue)
+	public GLVector xyzw()
 	{
-		mElements[pIndex] = pValue;
-	}
-	
-	public void plusAssign(GLVector pGLVector)
-	{
-		float[] lElements = pGLVector.mElements;
-		for (int i = 0; i < mDimension; i++)
-			mElements[i] += lElements[i];
+		return new GLVector( mElements[ 0 ], mElements[ 1 ], mElements[ 2 ], mElements[ 3 ] );
 	}
 
-	public GLVector minus(GLVector pGLVector)
+	public float get( final int pIndex )
 	{
-		GLVector lMinus = this.clone();
-		lMinus.minusAssign(pGLVector);
+		return mElements[ pIndex ];
+	}
+
+	public void set( final int pIndex, final float pValue )
+	{
+		mElements[ pIndex ] = pValue;
+	}
+
+	public void plusAssign( final GLVector pGLVector )
+	{
+		final float[] lElements = pGLVector.mElements;
+		for ( int i = 0; i < mDimension; i++ )
+			mElements[ i ] += lElements[ i ];
+	}
+
+	public GLVector minus( final GLVector pGLVector )
+	{
+		final GLVector lMinus = this.clone();
+		lMinus.minusAssign( pGLVector );
 		return lMinus;
 	}
 
-	public GLVector plus(GLVector pGLVector)
+	public GLVector plus( final GLVector pGLVector )
 	{
-		GLVector lPlus = this.clone();
-		lPlus.plusAssign(pGLVector);
+		final GLVector lPlus = this.clone();
+		lPlus.plusAssign( pGLVector );
 		return lPlus;
 	}
 
-	public void minusAssign(GLVector pGLVector)
+	public void minusAssign( final GLVector pGLVector )
 	{
-		float[] lElements = pGLVector.mElements;
-		for (int i = 0; i < mDimension; i++)
-			mElements[i] -= lElements[i];
+		final float[] lElements = pGLVector.mElements;
+		for ( int i = 0; i < mDimension; i++ )
+			mElements[ i ] -= lElements[ i ];
 	}
 
-	public void timesAssign(GLVector pGLVector)
+	public void timesAssign( final GLVector pGLVector )
 	{
-		float[] lElements = pGLVector.mElements;
-		for (int i = 0; i < mDimension; i++)
-			mElements[i] *= lElements[i];
+		final float[] lElements = pGLVector.mElements;
+		for ( int i = 0; i < mDimension; i++ )
+			mElements[ i ] *= lElements[ i ];
 	}
 
-	public void divAssign(GLVector pGLVector)
+	public void divAssign( final GLVector pGLVector )
 	{
-		float[] lElements = pGLVector.mElements;
-		for (int i = 0; i < mDimension; i++)
-			mElements[i] /= lElements[i];
+		final float[] lElements = pGLVector.mElements;
+		for ( int i = 0; i < mDimension; i++ )
+			mElements[ i ] /= lElements[ i ];
 	}
 
-	public float times(GLVector pGLVector)
+	public float times( final GLVector pGLVector )
 	{
 		float lResult = 0;
-		float[] lElements = pGLVector.mElements;
-		for (int i = 0; i < mDimension; i++)
-			lResult += mElements[i] * lElements[i];
+		final float[] lElements = pGLVector.mElements;
+		for ( int i = 0; i < mDimension; i++ )
+			lResult += mElements[ i ] * lElements[ i ];
 		return lResult;
 	}
 
-	public GLVector times(Quaternion q) {
+	public GLVector times( final Quaternion q )
+	{
 		final float[] in = this.mElements.clone();
-		float[] out = new float[mDimension];
+		final float[] out = new float[ mDimension ];
 
-		q.rotateVector(out, 0, in, 0);
+		q.rotateVector( out, 0, in, 0 );
 
-		return new GLVector(out);
+		return new GLVector( out );
 	}
 
-	public GLVector times(float num) {
-		GLVector n = this.clone();
-		for(int i = 0; i < mDimension; i++) {
-			n.mElements[i] = num * n.mElements[i];
+	public GLVector times( final float num )
+	{
+		final GLVector n = this.clone();
+		for ( int i = 0; i < mDimension; i++ )
+		{
+			n.mElements[ i ] = num * n.mElements[ i ];
 		}
 
 		return n;
@@ -155,9 +164,9 @@ public class GLVector
 	public float magnitude()
 	{
 		float lResult = 0;
-		for (int i = 0; i < mDimension; i++)
+		for ( int i = 0; i < mDimension; i++ )
 		{
-			float lValue = mElements[i];
+			final float lValue = mElements[ i ];
 			lResult += lValue * lValue;
 		}
 		return lResult;
@@ -165,17 +174,18 @@ public class GLVector
 
 	public GLVector normalize()
 	{
-		float lFactor = 1f / magnitude();
-		for (int i = 0; i < mDimension; i++)
-			mElements[i] *= lFactor;
+		final float lFactor = 1f / magnitude();
+		for ( int i = 0; i < mDimension; i++ )
+			mElements[ i ] *= lFactor;
 		return this;
 	}
 
-	public GLVector cross(GLVector v) {
-		float result[] = new float[3];
-		VectorUtil.crossVec3(result, this.toFloatBuffer().array(), v.toFloatBuffer().array());
+	public GLVector cross( final GLVector v )
+	{
+		final float result[] = new float[ 3 ];
+		VectorUtil.crossVec3( result, this.toFloatBuffer().array(), v.toFloatBuffer().array() );
 
-		return new GLVector(result);
+		return new GLVector( result );
 	}
 
 	public GLVector getNormalized()
@@ -185,7 +195,7 @@ public class GLVector
 
 	public FloatBuffer toFloatBuffer()
 	{
-		return FloatBuffer.wrap(mElements);
+		return FloatBuffer.wrap( mElements );
 	}
 
 	@Override
@@ -198,16 +208,16 @@ public class GLVector
 	}
 
 	@Override
-	public boolean equals(Object obj)
+	public boolean equals( final Object obj )
 	{
-		if (this == obj)
+		if ( this == obj )
 			return true;
-		if (obj == null)
+		if ( obj == null )
 			return false;
-		if (getClass() != obj.getClass())
+		if ( getClass() != obj.getClass() )
 			return false;
-		GLVector other = (GLVector) obj;
-		if (mDimension != other.mDimension)
+		final GLVector other = ( GLVector ) obj;
+		if ( mDimension != other.mDimension )
 			return false;
 		return true;
 	}
@@ -215,18 +225,20 @@ public class GLVector
 	@Override
 	public String toString()
 	{
-		return "GLVector [mElements=" + Arrays.toString(mElements)
-						+ ", mDimension="
-						+ mDimension
-						+ "]";
+		return "GLVector [mElements=" + Arrays.toString( mElements )
+				+ ", mDimension="
+				+ mDimension
+				+ "]";
 	}
 
-	public static GLVector getOneVector(int dimension) {
-		return new GLVector(1.0f, dimension);
+	public static GLVector getOneVector( final int dimension )
+	{
+		return new GLVector( 1.0f, dimension );
 	}
 
-	public static GLVector getNullVector(int dimension) {
-	  return new GLVector(0.0f, dimension);
+	public static GLVector getNullVector( final int dimension )
+	{
+		return new GLVector( 0.0f, dimension );
 	}
 
 }

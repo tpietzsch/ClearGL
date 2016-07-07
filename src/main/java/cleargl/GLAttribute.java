@@ -5,9 +5,10 @@ import com.jogamp.opengl.GL;
 public class GLAttribute implements GLInterface
 {
 	private final GLProgram mGlProgram;
+
 	private final int mAttributeIndex;
 
-	public GLAttribute(GLProgram pGlProgram, int pAttributeId)
+	public GLAttribute( final GLProgram pGlProgram, final int pAttributeId )
 	{
 		mGlProgram = pGlProgram;
 		mAttributeIndex = pAttributeId;
@@ -34,9 +35,9 @@ public class GLAttribute implements GLInterface
 	public String toString()
 	{
 		return "GLAttribute [mGlProgram=" + mGlProgram
-						+ ", mAttributeIndex="
-						+ mAttributeIndex
-						+ "]";
+				+ ", mAttributeIndex="
+				+ mAttributeIndex
+				+ "]";
 	}
 
 }
