@@ -24,7 +24,7 @@ import cleargl.GLTexture;
 import cleargl.GLUniform;
 import cleargl.GLVertexArray;
 import cleargl.GLVertexAttributeArray;
-import coremem.types.NativeTypeEnum;
+import cleargl.GLTypeEnum;
 
 public class ClearGLDemo
 {
@@ -152,7 +152,7 @@ public class ClearGLDemo
 
 					mTexture2 = new GLTexture(
 							mGLProgram2,
-							NativeTypeEnum.UnsignedByte,
+							GLTypeEnum.UnsignedByte,
 							4,
 							128, 128, 1,
 							true,
@@ -160,7 +160,7 @@ public class ClearGLDemo
 					mTexture2.copyFrom( getTextureBuffer2() );
 
 					mTexture3 = new GLTexture( mGLProgram2,
-							NativeTypeEnum.Float,
+							GLTypeEnum.Float,
 							1,
 							1280, 1280, 1,
 							true,

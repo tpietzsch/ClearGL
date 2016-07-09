@@ -7,8 +7,6 @@ import java.util.List;
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GL4;
 
-import coremem.types.NativeTypeEnum;
-
 /**
  * <Description>
  *
@@ -49,7 +47,7 @@ public class GLFramebuffer
 
 		backingTextures.add( new GLTexture(
 				gl,
-				NativeTypeEnum.Float,
+				GLTypeEnum.Float,
 				3,
 				width, height, 1, true, 1, channelDepth ) );
 
@@ -69,7 +67,7 @@ public class GLFramebuffer
 
 		backingTextures.add( new GLTexture(
 				gl,
-				NativeTypeEnum.Float,
+				GLTypeEnum.Float,
 				3,
 				width, height, 1, true, 1, channelDepth ) );
 
@@ -89,7 +87,7 @@ public class GLFramebuffer
 
 		backingTextures.add( new GLTexture(
 				gl,
-				NativeTypeEnum.UnsignedByte,
+				GLTypeEnum.UnsignedByte,
 				4,
 				width, height, 1, true, 1, channelDepth ) );
 
@@ -114,7 +112,7 @@ public class GLFramebuffer
 
 		depthBuffers.add( new GLTexture(
 				gl,
-				NativeTypeEnum.Float,
+				GLTypeEnum.Float,
 				-1,
 				width / scale, height / scale, 1, true, 1, depth ) );
 
