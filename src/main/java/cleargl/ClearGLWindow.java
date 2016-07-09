@@ -139,7 +139,6 @@ public class ClearGLWindow implements ClearGLDisplayable
 			final int pNumberOfSamples,
 			final ClearGLEventListener pClearGLWindowEventListener )
 	{
-		super();
 		mWindowTitle = pWindowTitle;
 		mWindowDefaultWidth = pDefaultWidth;
 		mWindowDefaultHeight = pDefaultHeight;
