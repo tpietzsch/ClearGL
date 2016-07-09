@@ -1,14 +1,11 @@
-package cleargl.testprog;
+package cleargl.demo;
 
 import com.jogamp.nativewindow.AbstractGraphicsDevice;
 import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLProfile;
 
-import cleargl.demo.ClearGLDemo;
-
 public class JOGLTestProgram
 {
-
 	public static void main( final String[] args ) throws InterruptedException
 	{
 		final AbstractGraphicsDevice lDefaultDevice = GLProfile.getDefaultDevice();
@@ -21,7 +18,5 @@ public class JOGLTestProgram
 
 		final ClearGLDemo lClearGLDemo = new ClearGLDemo();
 		lClearGLDemo.demo();
-
 	}
-
 }
