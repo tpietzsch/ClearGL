@@ -28,28 +28,25 @@ public class ClearGLDemo
 
 	private final static float s = 1f;
 
-	private final static float vertices1[] =
-			{ 0, 0, 0, 1, 0, s, 0, 1, s, 0, 0, 1 };
+	private final static float vertices1[] = {
+			0, 0, 0, 1,
+			0, s, 0, 1,
+			s, 0, 0, 1 };
 
-	private final static float colors1[] =
-			{ 0.0f,
-					0.0f,
-					1.0f,
-					1.0f,
-					1.0f,
-					0.0f,
-					0.0f,
-					1.0f,
-					0.0f,
-					0.0f,
-					1.0f,
-					1.0f };
+	private final static float colors1[] = {
+			0.0f, 0.0f, 1.0f, 1.0f,
+			1.0f, 0.0f, 0.0f, 1.0f,
+			0.0f, 0.0f, 1.0f, 1.0f };
 
-	private final static float vertices2[] =
-			{ 0, 0, 0, 1, 0, -s, 0, 1, -s, 0, 0, 1 };
+	private final static float vertices2[] = {
+			0, 0, 0, 1,
+			0, -s, 0, 1,
+			-s, 0, 0, 1 };
 
-	private final static float texcoord2[] =
-			{ 0, 0, 1, 0f, 0, 1 };
+	private final static float texcoord2[] = {
+			0, 0,
+			1, 0,
+			0, 1 };
 
 	private Buffer getTextureBuffer2()
 	{
@@ -72,7 +69,6 @@ public class ClearGLDemo
 	{
 		final ClearGLDefaultEventListener lClearGLWindowEventListener = new ClearGLDefaultEventListener()
 		{
-
 			private GLProgram mGLProgram1, mGLProgram2;
 
 			private GLAttribute mPosition1, mColor1, mPosition2,
@@ -104,7 +100,6 @@ public class ClearGLDemo
 				{
 					final GL lGL = pDrawable.getGL();
 					lGL.glDisable( GL.GL_DEPTH_TEST );
-					// pGL.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
 					mGLProgram1 = GLProgram.buildProgram( lGL,
 							ClearGLDemo.class,
@@ -120,10 +115,8 @@ public class ClearGLDemo
 
 					mGLVertexArray1 = new GLVertexArray( mGLProgram1 );
 					mGLVertexArray1.bind();
-					mPositionAttributeArray1 = new GLVertexAttributeArray( mPosition1,
-							4 );
-					mColorAttributeArray1 = new GLVertexAttributeArray( mColor1,
-							4 );
+					mPositionAttributeArray1 = new GLVertexAttributeArray( mPosition1, 4 );
+					mColorAttributeArray1 = new GLVertexAttributeArray( mColor1, 4 );
 
 					mGLVertexArray1.addVertexAttributeArray( mPositionAttributeArray1,
 							Buffers.newDirectFloatBuffer( vertices1 ) );
@@ -146,22 +139,19 @@ public class ClearGLDemo
 
 					mGLVertexArray2 = new GLVertexArray( mGLProgram2 );
 					mGLVertexArray2.bind();
-					mPositionAttributeArray2 = new GLVertexAttributeArray( mPosition2,
-							4 );
-					mTexCoordAttributeArray2 = new GLVertexAttributeArray( mTexCoord2,
-							2 );
+					mPositionAttributeArray2 = new GLVertexAttributeArray( mPosition2, 4 );
+					mTexCoordAttributeArray2 = new GLVertexAttributeArray( mTexCoord2, 2 );
 
 					mGLVertexArray2.addVertexAttributeArray( mPositionAttributeArray2,
 							Buffers.newDirectFloatBuffer( vertices2 ) );
 					mGLVertexArray2.addVertexAttributeArray( mTexCoordAttributeArray2,
 							Buffers.newDirectFloatBuffer( texcoord2 ) );
 
-					mTexture2 = new GLTexture( mGLProgram2,
+					mTexture2 = new GLTexture(
+							mGLProgram2,
 							NativeTypeEnum.UnsignedByte,
 							4,
-							128,
-							128,
-							1,
+							128, 128, 1,
 							true,
 							2 );
 					mTexture2.copyFrom( getTextureBuffer2() );
@@ -169,9 +159,7 @@ public class ClearGLDemo
 					mTexture3 = new GLTexture( mGLProgram2,
 							NativeTypeEnum.Float,
 							1,
-							1280,
-							1280,
-							1,
+							1280, 1280, 1,
 							true,
 							4 );
 					mTexture3.copyFrom( getTextureBuffer3() );
@@ -197,12 +185,10 @@ public class ClearGLDemo
 					pHeight = 1;
 				final float ratio = ( 1.0f * pWidth ) / pHeight;
 				// setPerspectiveProjectionMatrix(53.13f, ratio, 1.0f, 30.0f);
-				getClearGLWindow().setOrthoProjectionMatrix( -2,
-						2,
-						-2,
-						2,
-						10,
-						-10 );
+				getClearGLWindow().setOrthoProjectionMatrix(
+						-2, 2,
+						-2, 2,
+						10, -10 );
 			}
 
 			@Override
@@ -214,7 +200,10 @@ public class ClearGLDemo
 
 				lGL.glClear( GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT );
 
-				getClearGLWindow().lookAt( 0f, 0f, 1, 0f, 0f, -1, 0, 1, 0 );
+				getClearGLWindow().lookAt(
+						0, 0, 1,
+						0, 0, -1,
+						0, 1, 0 );
 
 				mGLProgram1.use( lGL );
 
