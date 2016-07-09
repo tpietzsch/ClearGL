@@ -21,11 +21,13 @@ public interface ClearGLDisplayable extends GLCloseable
 
 	public abstract void toggleFullScreen();
 
+	// TODO remove
 	public abstract void setPerspectiveProjectionMatrix( float fov,
 			float ratio,
 			float nearP,
 			float farP );
 
+	// TODO remove
 	public abstract void setOrthoProjectionMatrix( float left,
 			float right,
 			float bottom,
@@ -33,6 +35,7 @@ public interface ClearGLDisplayable extends GLCloseable
 			float zNear,
 			float zFar );
 
+	// TODO remove
 	public abstract void lookAt( float pPosX,
 			float pPosY,
 			float pPosZ,
@@ -43,8 +46,10 @@ public interface ClearGLDisplayable extends GLCloseable
 			float pUpY,
 			float pUpZ );
 
+	// TODO remove
 	public abstract GLMatrix getProjectionMatrix();
 
+	// TODO remove
 	public abstract GLMatrix getViewMatrix();
 
 	public abstract String getWindowTitle();
@@ -55,6 +60,7 @@ public interface ClearGLDisplayable extends GLCloseable
 
 	public abstract void setFullscreen( boolean pFullScreen );
 
+	// TODO remove
 	public abstract void display();
 
 	public abstract WindowClosingMode setDefaultCloseOperation( WindowClosingMode pWindowClosingMode );
@@ -78,6 +84,7 @@ public interface ClearGLDisplayable extends GLCloseable
 
 	public abstract float getLastFPS();
 
+	// TODO remove
 	public abstract float getAspectRatio();
 
 	public abstract Component getComponent();
