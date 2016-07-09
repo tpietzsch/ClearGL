@@ -8,9 +8,12 @@ import java.nio.IntBuffer;
 import org.junit.Test;
 
 import com.jogamp.common.nio.Buffers;
+import com.jogamp.nativewindow.AbstractGraphicsDevice;
 import com.jogamp.opengl.GL;
 import com.jogamp.opengl.GLAutoDrawable;
+import com.jogamp.opengl.GLCapabilities;
 import com.jogamp.opengl.GLException;
+import com.jogamp.opengl.GLProfile;
 
 import cleargl.ClearGLDefaultEventListener;
 import cleargl.ClearGLDisplayable;
@@ -288,6 +291,19 @@ public class ClearGLDemo
 				Thread.sleep( 100 );
 			}
 		}
+	}
 
+	public static void main( final String[] args ) throws InterruptedException
+	{
+		final AbstractGraphicsDevice lDefaultDevice = GLProfile.getDefaultDevice();
+		final GLProfile lProfile = GLProfile.getMaxProgrammable( true );
+		final GLCapabilities lCapabilities = new GLCapabilities( lProfile );
+
+		System.out.println( "Device: " + lDefaultDevice );
+		System.out.println( "Capabilities: " + lCapabilities );
+		System.out.println( "Profile: " + lProfile );
+
+		final ClearGLDemo lClearGLDemo = new ClearGLDemo();
+		lClearGLDemo.demo();
 	}
 }
