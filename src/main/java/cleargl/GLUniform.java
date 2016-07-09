@@ -137,9 +137,7 @@ public class GLUniform implements GLInterface
 	public String toString()
 	{
 		return "GLUniform [mGlProgram=" + mGlProgram
-				+ ", mUniformId="
-				+ mUniformId
+				+ ", mUniformId=" + mUniformId
 				+ "]";
 	}
-
 }

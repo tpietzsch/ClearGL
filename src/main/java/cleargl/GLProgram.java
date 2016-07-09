@@ -389,12 +389,9 @@ public class GLProgram implements GLInterface, GLCloseable
 	public String toString()
 	{
 		return "GLProgram [mGL=" + mGL
-				+ ", mProgramId="
-				+ mProgramId
-				+ ", mVertexShader="
-				+ mVertexShader
-				+ ", mFragmentShader="
-				+ mFragmentShader
+				+ ", mProgramId=" + mProgramId
+				+ ", mVertexShader=" + mVertexShader
+				+ ", mFragmentShader=" + mFragmentShader
 				+ "]";
 	}
 

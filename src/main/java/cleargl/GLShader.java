@@ -247,12 +247,9 @@ public class GLShader implements GLInterface, GLCloseable
 	public String toString()
 	{
 		return "GLShader [mGL=" + mGL
-				+ ", mShaderId="
-				+ mShaderId
-				+ ", mShaderType="
-				+ mShaderType
-				+ ", mShaderSource="
-				+ mShaderSource
+				+ ", mShaderId=" + mShaderId
+				+ ", mShaderType=" + mShaderType
+				+ ", mShaderSource=" + mShaderSource
 				+ "]";
 	}
 
