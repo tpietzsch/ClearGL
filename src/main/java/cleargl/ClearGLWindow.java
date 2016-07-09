@@ -40,8 +40,6 @@ public class ClearGLWindow implements ClearGLDisplayable
 
 	private final int mWindowDefaultHeight;
 
-	private ClearGLDisplayable mClearGLWindow;
-
 	private final GLMatrix mProjectionMatrix;
 
 	private final GLMatrix mViewMatrix;
